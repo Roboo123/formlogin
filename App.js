@@ -39,7 +39,7 @@ export default function App() {
       );
 
       if (userData.password === hashedPassword) {
-        Alert.alert('Zalogowano', `Witaj ${userData.firstname} ${userData.lastName}!`);
+        Alert.alert('Zalogowano', `Witaj ${userData.firstname} ${userData.lastname}!`);
         setUser(userData);
       } else {
         Alert.alert('Błąd', 'Niepoprawne dane logowania');
@@ -56,13 +56,13 @@ export default function App() {
     Alert.alert('Wylogowano', 'Zostałeś poprawnie wylogowany');
   }
 
-  const handleAddUser = async (email, firstname, lastName, login, plainPassword) => {
+  const handleAddUser = async (email, firstname, lastname, login, plainPassword) => {
     try {
       const password = await hashPassword(plainPassword);
       await addDoc(collection(db, 'users'), {
         email,
         firstname,
-        lastName,
+        lastname,
         login,
         password
       });
@@ -105,7 +105,7 @@ export default function App() {
       ) : (
         <View style={styles.container}>
           <View>
-            <Text style={styles.title}>Witaj, {user.firstName} {user.lastName}</Text>
+            <Text style={styles.title}>Witaj, {user.firstname} {user.lastname}</Text>
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
               <Text>Wyloguj się</Text>
             </TouchableOpacity>
